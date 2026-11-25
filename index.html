@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stéphane Beau Portfolio</title>
+<meta name="description" content="Documentation as AI infrastructure: a seven-agent change-to-docs pipeline, a corpus census, and open work by Stéphane Beau.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+body{margin:0;font-family:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;color:#0D1430;background:#F2F4F7;color-scheme:light}
+a{color:#2B4BFF}a:hover{color:#1730C4}
+button{font:inherit;cursor:pointer}
+button:disabled{cursor:not-allowed}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #F5A623;outline-offset:2px}
+summary{list-style:none;cursor:pointer}summary::-webkit-details-marker{display:none}
+html{scroll-behavior:smooth}
+section,header{scroll-margin-top:12px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div style="font-size: 17px; line-height: 1.55; background: #F2F4F7; color: #0D1430">
+
+<!-- HERO -->
+<header id="top" style="background-color: #0D1430; color: #F2F4F7; background-image: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px); background-size: 48px 48px">
+<div style="max-width: 1160px; margin: 0 auto; padding: 0 24px">
+<nav aria-label="Sections" style="display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; padding: 22px 0; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 13px">
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-weight: 600; margin-right: auto">Stéphane Beau</span>
+<a href="#pipeline" style="color: #C9D1EA; text-decoration: none">Pipeline</a>
+<a href="#decisions" style="color: #C9D1EA; text-decoration: none">Decisions</a>
+<a href="#census" style="color: #C9D1EA; text-decoration: none">Census</a>
+<a href="#metrics" style="color: #C9D1EA; text-decoration: none">Metrics</a>
+<a href="#open-work" style="color: #C9D1EA; text-decoration: none">Open work</a>
+<a href="#about" style="color: #C9D1EA; text-decoration: none">About</a>
+</nav>
+<div style="display: flex; flex-direction: column; gap: 32px; padding: 72px 0 64px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #F5B83D">Technical writer turned documentation systems builder</p>
+<h1 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(44px, 7.4vw, 108px); line-height: 0.98; letter-spacing: -0.03em; text-wrap: balance; max-width: 13ch">When AI answers from your docs, a stale page is <span style="color: #F5B83D; font-style: italic">bad data.</span></h1>
+<p style="margin: 0; font-size: 21px; line-height: 1.5; color: #C9D1EA; max-width: 58ch">I spent 25 years writing technical documentation. In 2026 I built the system that keeps a large knowledge base in step with the product it describes: seven agents, one mandatory human approval, and a census that audits what the AI can really retrieve.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 10px; margin-top: 12px">
+<div style="border: 1px solid #3A4672; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #9BA8CC">01</span><strong style="font-weight: 600">Product changes</strong><span style="font-size: 14px; color: #C9D1EA">A change request is filed.</span></div>
+<div style="border: 1px solid #FF8A73; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #FF8A73">02</span><strong style="font-weight: 600">Docs lag behind</strong><span style="font-size: 14px; color: #C9D1EA">Nobody measures the gap.</span></div>
+<div style="border: 1px solid #FF8A73; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #FF8A73">03</span><strong style="font-weight: 600">Index serves stale pages</strong><span style="font-size: 14px; color: #C9D1EA">Retrieval is contaminated.</span></div>
+<div style="border: 1px solid #FF8A73; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #FF8A73">04</span><strong style="font-weight: 600">Assistant answers wrong</strong><span style="font-size: 14px; color: #C9D1EA">With full confidence.</span></div>
+<div style="background: #F5B83D; color: #0D1430; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px">05</span><strong style="font-weight: 600">Pipeline plus writer</strong><span style="font-size: 14px">Closes the loop.</span></div>
+</div>
+</div>
+</div>
+<div style="border-top: 1px solid #3A4672">
+<div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: 0 32px">
+<div style="padding: 26px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">Best in Show</span><span style="color: #C9D1EA; font-size: 15px">company-wide hackathon, 485 projects, peer vote</span></div>
+<div style="padding: 26px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">7 agents, 1 gate</span><span style="color: #C9D1EA; font-size: 15px">nothing publishes without a writer's approval</span></div>
+<div style="padding: 26px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">165k → 83k</span><span style="color: #C9D1EA; font-size: 15px">tokens per run after taking the LLM out of routing</span></div>
+<div style="padding: 26px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">581 commits</span><span style="color: #C9D1EA; font-size: 15px">sole author, starting the year with no Python</span></div>
+</div>
+</div>
+</header>
+
+<!-- PIPELINE -->
+<section id="pipeline" style="padding: 88px 0">
+<div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #2B4BFF">Case 01 · Change-to-docs pipeline</p>
+<h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance">Run a change request through the pipeline</h2>
+<p style="margin: 0; color: #4A5676; max-width: 64ch">A product change arrives as a structured request. A lookup table decides the route, each agent sees only the fields it needs, and the run stops at a writer before anything client-facing is drafted. This is a simplified simulation with invented data. The routing rules are the real ones.</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="background: #FFFFFF; border: 1px solid #D5DBE8; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5676">1 · Request type</p>
+<div id="types" style="display: flex; flex-wrap: wrap; gap: 8px">
+</div>
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #4A5676" id="scenario"></p>
+<p style="margin: 6px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5676">2 · What intake finds</p>
+<button type="button" id="t-docs" style="min-height: 44px; display: flex; gap: 12px; align-items: center; text-align: left; background: transparent; border: 0; padding: 0; color: #0D1430"><span aria-hidden="true" style="width: 22px; height: 22px; border: 2px solid #0D1430; flex: none"></span>Docs changes noted</button>
+<button type="button" id="t-notice" style="min-height: 44px; display: flex; gap: 12px; align-items: center; text-align: left; background: transparent; border: 0; padding: 0; color: #0D1430"><span aria-hidden="true" style="width: 22px; height: 22px; border: 2px solid #0D1430; flex: none"></span>Customer notice required</button>
+<p style="margin: 6px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5676">3 · Route, with no LLM call</p>
+<div style="background: #0D1430; color: #F2F4F7; padding: 14px 16px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; overflow-wrap: anywhere"><span id="routeText"></span> → <strong id="modeText" style="color: #F5B83D; font-weight: 500"></strong></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" id="run" style="min-height: 48px; padding: 10px 22px; border: 0; background: #2B4BFF; color: #FFFFFF; font-weight: 600"></button>
+<button type="button" id="reset" style="min-height: 48px; padding: 10px 22px; border: 1px solid #0D1430; background: transparent; color: #0D1430; font-weight: 600">Start over</button>
+</div>
+<p style="margin: 0; border: 1px dashed #9BA8CC; padding: 14px 16px; font-size: 15px; color: #4A5676"><strong style="color: #0D1430">05 · Health scan</strong> runs on its own schedule, off this path. It was pulled out after it turned out to be the single largest token cost of every run.</p>
+</div>
+
+<div id="steps" aria-live="polite" style="flex: 3 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; margin-top: 24px">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<h3 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600">Tokens per end-to-end run</h3>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>First full run, every agent forwarding everything</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace">165k</span></div><div style="height: 22px; background: #E1E6F0"><div style="height: 100%; width: 100%; background: #0D1430"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>After the deterministic-first rewrite</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace">90.5k</span></div><div style="height: 22px; background: #E1E6F0"><div style="height: 100%; width: 54.8%; background: #0D1430"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><strong style="font-weight: 600">After tuning, 45% below the first run</strong><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500">83k</span></div><div style="height: 22px; background: #E1E6F0"><div style="height: 100%; width: 50.3%; background: #2B4BFF"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Same tuned design, stale prompts still deployed</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace">136k</span></div><div style="height: 22px; background: #E1E6F0"><div style="height: 100%; width: 82.4%; background-color: #F5B83D; background-image: repeating-linear-gradient(135deg, transparent 0 8px, rgba(13,20,48,0.3) 8px 10px)"></div></div></div>
+<p style="margin: 0; color: #4A5676; font-size: 15px">Measured on single full runs in March and April 2026. The striped bar is a regression that was not a design problem: see decision 03.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<h3 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600">Where an LLM is still used</h3>
+<div style="display: flex; flex-direction: column; border-top: 2px solid #0D1430; font-size: 15px">
+<div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid #D5DBE8"><strong style="flex: 0 0 132px; font-weight: 600">00 Orchestrator</strong><span>Routing table. No LLM.</span></div>
+<div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid #D5DBE8"><strong style="flex: 0 0 132px; font-weight: 600">01 Intake</strong><span>Eight rule-based detectors, then LLM-assisted extraction behind validation. 219 tests.</span></div>
+<div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid #D5DBE8"><strong style="flex: 0 0 132px; font-weight: 600">02 Impact</strong><span>Retrieval over the vector index, capped at 8 candidates. The LLM only ranks inside the cap.</span></div>
+<div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid #D5DBE8"><strong style="flex: 0 0 132px; font-weight: 600">03 Content prep</strong><span>LLM drafts. A human approves.</span></div>
+<div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid #D5DBE8"><strong style="flex: 0 0 132px; font-weight: 600">04 Notice</strong><span>LLM drafts against written rules. 318 tests.</span></div>
+<div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid #D5DBE8"><strong style="flex: 0 0 132px; font-weight: 600">05 Health</strong><span>Independent asynchronous loop.</span></div>
+<div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid #D5DBE8"><strong style="flex: 0 0 132px; font-weight: 600">06 Governance</strong><span>Deterministic aggregation and a readiness score.</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- DECISIONS -->
+<section id="decisions" style="background: #0D1430; color: #F2F4F7; padding: 88px 0">
+<div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #F5B83D">Case 01 · Design record</p>
+<h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance">Every rule in the system started as a <span style="font-style: italic; color: #F5B83D">failure</span></h2>
+<p style="margin: 0; color: #C9D1EA; max-width: 64ch">Open any decision to see what broke, the rule that replaced it, and what stayed in the design afterwards.</p>
+</div>
+<div style="display: flex; flex-direction: column; border-top: 1px solid #3A4672">
+
+<details open style="border-bottom: 1px solid #3A4672">
+<summary style="display: flex; gap: 20px; align-items: baseline; padding: 22px 0; min-height: 44px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #F5B83D">01</span><span style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(22px, 2.6vw, 32px); font-weight: 500; line-height: 1.15; flex: 1">Never let an agent invent a page ID</span><span aria-hidden="true" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #9BA8CC">open / close</span></summary>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; padding: 0 0 28px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #FF8A73">What failed</span><p style="margin: 0; color: #E3E8F6">When the impact agent could not reach the page registry, it made up plausible identifiers: eight pages where one existed. Tightening the prompt did not help.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #F5B83D">The rule</span><p style="margin: 0; color: #E3E8F6">If the request names its pages, return exactly those and stop. Never infer. If unsure, leave it out.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9FB0FF">What stayed</span><p style="margin: 0; color: #E3E8F6">Real retrieval arrived later, and the rule stayed. A confident wrong page costs more than a missing one.</p></div>
+</div>
+</details>
+
+<details style="border-bottom: 1px solid #3A4672">
+<summary style="display: flex; gap: 20px; align-items: baseline; padding: 22px 0; min-height: 44px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #F5B83D">02</span><span style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(22px, 2.6vw, 32px); font-weight: 500; line-height: 1.15; flex: 1">Route before you reason</span><span aria-hidden="true" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #9BA8CC">open / close</span></summary>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; padding: 0 0 28px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #FF8A73">What failed</span><p style="margin: 0; color: #E3E8F6">The first prompts ran past 200 lines each. They inferred rules the process did not have and flagged optional fields as missing on every run. One run cost 165k tokens.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #F5B83D">The rule</span><p style="margin: 0; color: #E3E8F6">Validate fast, route on the request type with a fixed table, and reason only inside the branch. Each agent gets the fields it needs, never the upstream payload.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9FB0FF">What stayed</span><p style="margin: 0; color: #E3E8F6">Prompts of about 90 lines and 83k tokens per run. It took more than 64 orchestrator versions to make routing reliable.</p></div>
+</div>
+</details>
+
+<details style="border-bottom: 1px solid #3A4672">
+<summary style="display: flex; gap: 20px; align-items: baseline; padding: 22px 0; min-height: 44px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #F5B83D">03</span><span style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(22px, 2.6vw, 32px); font-weight: 500; line-height: 1.15; flex: 1">The platform will run stale prompts and not tell you</span><span aria-hidden="true" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #9BA8CC">open / close</span></summary>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; padding: 0 0 28px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #FF8A73">What failed</span><p style="margin: 0; color: #E3E8F6">After the fixes, a test got worse: 136k tokens and the same invented pages. The fixes were in local files. The deployed agents were still running the old prompts.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #F5B83D">The rule</span><p style="margin: 0; color: #E3E8F6">Confirm what is deployed before touching anything else. Keep versioned prompt files and one master context document outside the platform.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9FB0FF">What stayed</span><p style="margin: 0; color: #E3E8F6">The repository is the source of truth. Later I found that saving one agent silently removed its tools, so every save ends with a re-check.</p></div>
+</div>
+</details>
+
+<details style="border-bottom: 1px solid #3A4672">
+<summary style="display: flex; gap: 20px; align-items: baseline; padding: 22px 0; min-height: 44px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #F5B83D">04</span><span style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(22px, 2.6vw, 32px); font-weight: 500; line-height: 1.15; flex: 1">Put the human gate in the middle</span><span aria-hidden="true" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #9BA8CC">open / close</span></summary>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; padding: 0 0 28px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #FF8A73">What failed</span><p style="margin: 0; color: #E3E8F6">A gate at the end would let drafts flow into customer notices and governance before any person had seen them.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #F5B83D">The rule</span><p style="margin: 0; color: #E3E8F6">The gate sits between content prep and the notice. The expensive, client-facing steps only run on approved packages.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9FB0FF">What stayed</span><p style="margin: 0; color: #E3E8F6">Approval is part of the architecture and cannot be switched off. In a regulated industry that is what made the project credible.</p></div>
+</div>
+</details>
+
+<details style="border-bottom: 1px solid #3A4672">
+<summary style="display: flex; gap: 20px; align-items: baseline; padding: 22px 0; min-height: 44px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #F5B83D">05</span><span style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(22px, 2.6vw, 32px); font-weight: 500; line-height: 1.15; flex: 1">The real workflow lives in the comments</span><span aria-hidden="true" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #9BA8CC">open / close</span></summary>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; padding: 0 0 28px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #FF8A73">What failed</span><p style="margin: 0; color: #E3E8F6">Intake misclassified a real request. The need for a customer notice was stated in the comment thread, and the agent had read only the form fields.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #F5B83D">The rule</span><p style="margin: 0; color: #E3E8F6">A full comment-thread scan is mandatory before any field check. A notice that was already sent reads as success, not as missing.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9FB0FF">What stayed</span><p style="margin: 0; color: #E3E8F6">Three of the main fixes came from real requests, not from design. Test cases now start from real ones.</p></div>
+</div>
+</details>
+
+<details style="border-bottom: 1px solid #3A4672">
+<summary style="display: flex; gap: 20px; align-items: baseline; padding: 22px 0; min-height: 44px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #F5B83D">06</span><span style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(22px, 2.6vw, 32px); font-weight: 500; line-height: 1.15; flex: 1">Credentials never reach the browser</span><span aria-hidden="true" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #9BA8CC">open / close</span></summary>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; padding: 0 0 28px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #FF8A73">What failed</span><p style="margin: 0; color: #E3E8F6">Every attempt to spare writers a token paste failed against browser token encryption, and every cross-origin option on the tool server either crashed it or was ignored.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #F5B83D">The rule</span><p style="margin: 0; color: #E3E8F6">Revert to the last clean commit. A server-side proxy holds the credential and the browser talks only to that proxy.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9FB0FF">What stayed</span><p style="margin: 0; color: #E3E8F6">Simpler, safer, and the token prompt disappeared from the interface. Every surface built since uses the same proxy.</p></div>
+</div>
+</details>
+
+<details style="border-bottom: 1px solid #3A4672">
+<summary style="display: flex; gap: 20px; align-items: baseline; padding: 22px 0; min-height: 44px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #F5B83D">07</span><span style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(22px, 2.6vw, 32px); font-weight: 500; line-height: 1.15; flex: 1">Build your own retriever for impact mapping</span><span aria-hidden="true" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #9BA8CC">open / close</span></summary>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; padding: 0 0 28px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #FF8A73">What failed</span><p style="margin: 0; color: #E3E8F6">Without retrieval, the impact agent fell back on inference to find affected pages. The obvious fix was to call the existing question-answering API.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #F5B83D">The rule</span><p style="margin: 0; color: #E3E8F6">On an engineer's advice, build a retriever directly on the vector index instead: a bounded semantic search, confirmed on three real requests.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #9FB0FF">What stayed</span><p style="margin: 0; color: #E3E8F6">That search became the tool other teams asked to use for their own documentation.</p></div>
+</div>
+</details>
+
+</div>
+</div>
+</section>
+
+<!-- CENSUS -->
+<section id="census" style="padding: 88px 0">
+<div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #2B4BFF">Case 02 · Corpus census</p>
+<h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance">Auditing what the AI can retrieve</h2>
+<p style="margin: 0; color: #4A5676; max-width: 64ch">The content system knows which pages exist. The search index knows which pages the assistant can serve. Nobody had compared the two. I reconciled them page by page across roughly 6,600 canonical pages. More than 98% of public pages were retrievable, and the exceptions were invisible from every existing dashboard.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 0; border: 1px solid #0D1430">
+<div style="background: #FFFFFF; padding: 26px; display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5676">Try the reconciliation on one page</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; padding: 10px 0; border-bottom: 1px solid #D5DBE8"><span>Exists in the content system?</span><span style="display: flex; border: 1px solid #0D1430"><button type="button" data-seg="cms" data-v="y" style="min-height: 44px; min-width: 64px; border: 0">Yes</button><button type="button" data-seg="cms" data-v="n" style="min-height: 44px; min-width: 64px; border: 0">No</button></span></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; padding: 10px 0; border-bottom: 1px solid #D5DBE8"><span>Present in the AI index?</span><span style="display: flex; border: 1px solid #0D1430"><button type="button" data-seg="idx" data-v="y" style="min-height: 44px; min-width: 64px; border: 0">Yes</button><button type="button" data-seg="idx" data-v="n" style="min-height: 44px; min-width: 64px; border: 0">No</button></span></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; padding: 10px 0"><span>Visibility flag matches the page?</span><span style="display: flex; border: 1px solid #0D1430"><button type="button" data-seg="flag" data-v="y" style="min-height: 44px; min-width: 64px; border: 0">Yes</button><button type="button" data-seg="flag" data-v="n" style="min-height: 44px; min-width: 64px; border: 0">No</button></span></div>
+</div>
+<div id="verdict" aria-live="polite" style="padding: 26px; display: flex; flex-direction: column; gap: 10px; min-height: 200px">
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase">Finding</span>
+<span id="v-v" style="font-family: 'Fraunces', Georgia, serif; font-size: 40px; font-weight: 600; line-height: 1.05"></span>
+<span id="v-d"></span>
+<span id="v-n" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px"></span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 18px">
+<h3 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600">The verified ledger</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 0 24px; border-top: 2px solid #0D1430">
+<div style="padding: 18px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 56px; font-weight: 600; line-height: 1">58</span><strong style="font-weight: 600">Blind spots</strong><span style="font-size: 15px; color: #4A5676">Public pages absent from the index.</span></div>
+<div style="padding: 18px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 56px; font-weight: 600; line-height: 1">12</span><strong style="font-weight: 600">Wrongly suppressed</strong><span style="font-size: 15px; color: #4A5676">Indexed, marked internal, never surfaced.</span></div>
+<div style="padding: 18px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 56px; font-weight: 600; line-height: 1">41</span><strong style="font-weight: 600">Navigation as content</strong><span style="font-size: 15px; color: #4A5676">Menu entries indexed as if they were pages.</span></div>
+<div style="padding: 18px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 56px; font-weight: 600; line-height: 1; color: #A32A16">123</span><strong style="font-weight: 600">Ghost pages</strong><span style="font-size: 15px; color: #4A5676">Deleted pages the index still serves.</span></div>
+<div style="padding: 18px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 56px; font-weight: 600; line-height: 1">215</span><strong style="font-weight: 600">Layers out of step</strong><span style="font-size: 15px; color: #4A5676">Page chunks and their parent records disagree.</span></div>
+<div style="padding: 18px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 56px; font-weight: 600; line-height: 1">1</span><strong style="font-weight: 600">Flag conflict</strong><span style="font-size: 15px; color: #4A5676">Parent and chunks carry different visibility.</span></div>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 18px">
+<h3 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600">How a finding earns its place</h3>
+<p style="margin: 0; color: #4A5676; max-width: 64ch">The first pass flagged 539 problems. Each one then had to climb four rungs, and many fell off: stale snapshots, aliased pages, the wrong system measured. The pipeline now refuses to compare data of different dates and prints every exclusion it applies.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 10px">
+<div style="background: #FFFFFF; border: 1px solid #D5DBE8; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; color: #2B4BFF">RUNG 1</span><strong style="font-weight: 600">Modelled</strong><span style="font-size: 15px; color: #4A5676">The data suggests a problem.</span></div>
+<div style="background: #FFFFFF; border: 1px solid #D5DBE8; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; color: #2B4BFF">RUNG 2</span><strong style="font-weight: 600">Enumerated</strong><span style="font-size: 15px; color: #4A5676">Every affected page is listed by ID.</span></div>
+<div style="background: #FFFFFF; border: 1px solid #D5DBE8; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; color: #2B4BFF">RUNG 3</span><strong style="font-weight: 600">Behaviourally proven</strong><span style="font-size: 15px; color: #4A5676">The live system shows the symptom.</span></div>
+<div style="background: #0D1430; color: #F2F4F7; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; color: #F5B83D">RUNG 4</span><strong style="font-weight: 600">Hand-verified</strong><span style="font-size: 15px; color: #C9D1EA">A person checked examples an engineer can repeat in one query.</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- METRICS -->
+<section id="metrics" style="background: #FFFFFF; padding: 88px 0">
+<div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #2B4BFF">Both cases · Evidence</p>
+<h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance">What the numbers measure, and what they don't</h2>
+<p style="margin: 0; color: #4A5676; max-width: 64ch">The headline figures are real, but they measure different things and get merged when retold. This is the table I handed to the next owner.</p>
+</div>
+
+<div style="display: flex; flex-direction: column; border-top: 2px solid #0D1430">
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 250px; font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">177</span><span style="flex: 1 1 200px; font-size: 15px; color: #4A5676">My change-request tracker, one fiscal year</span><span style="flex: 2 1 320px">Requests I handled as a writer with the tools in the loop. Not requests processed by the pipeline on its own.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 250px; font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">88</span><span style="flex: 1 1 200px; font-size: 15px; color: #4A5676">Notice review sheet</span><span style="flex: 2 1 320px">Customer notices drafted with the tool and sent by me: 81 originals and 7 reminders.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 250px; font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">1,585 · 98.1%</span><span style="flex: 1 1 200px; font-size: 15px; color: #4A5676">Agent platform history, four months</span><span style="flex: 2 1 320px">All runs, tests and demos included. Completion means the run finished, not that a writer accepted the output.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 250px; font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">$0.29</span><span style="flex: 1 1 200px; font-size: 15px; color: #4A5676">Same history</span><span style="flex: 2 1 320px">Compute cost of one orchestrated run. Excludes the index, hosting and writer time.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 250px; font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">45 → 5 min</span><span style="flex: 1 1 200px; font-size: 15px; color: #4A5676">Content reviewer, sample pages</span><span style="flex: 2 1 320px">Per-page review time against 79 written rules. Small sample, self-timed.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 250px; font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">130+ hours</span><span style="flex: 1 1 200px; font-size: 15px; color: #4A5676">Derived</span><span style="flex: 2 1 320px">An estimate built on the row above, plus notice drafting time.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 250px; font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">9 users</span><span style="flex: 1 1 200px; font-size: 15px; color: #4A5676">Platform records</span><span style="flex: 2 1 320px">People who ran the tools, six of them outside the writing team. Not a count of sustained adoption.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 250px; font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 600; line-height: 1.1">537 tests</span><span style="flex: 1 1 200px; font-size: 15px; color: #4A5676">Repository test suites</span><span style="flex: 2 1 320px">Unit and fixture tests. There is no end-to-end regression suite on the pipeline.</span></div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px">
+<div style="background: #A32A16; color: #FFFFFF; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase">One figure I withdrew</span>
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 56px; font-weight: 600; line-height: 1; text-decoration: line-through">95%+</span>
+<p style="margin: 0">An earlier report claimed 95%+ reliability across users for a prompt framework. When I audited the test records, only 9 of 50 cases had scores that could be parsed. I replaced the number with a description of the method and told the next owner not to reuse it.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<h3 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600">Never measured, and should be</h3>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px">
+<li>Time from a change request closing to the page being updated. This lag is the reason the system exists.</li>
+<li>Accuracy of page mapping on a hand-labelled set of 50 requests.</li>
+<li>How often a writer rejects a package at the gate.</li>
+</ul>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<h3 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600">What I would do differently</h3>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px">
+<li>Build the labelled evaluation set before touching the interface.</li>
+<li>Instrument the lag metric on day one.</li>
+<li>Pair with an engineer one day a week, for continuity more than speed.</li>
+<li>Treat the content reviewer as the product. It has the clearest value and the smallest surface.</li>
+</ul>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<h3 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600">Timeline, 2025 to 2026</h3>
+<div style="display: flex; flex-direction: column; border-top: 1px solid #D5DBE8; font-size: 15px">
+<div style="display: flex; gap: 16px; padding: 9px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #4A5676">Nov to Feb</span><span>Prompt experiment in two rounds, with 8 then 6 testers. Finding: content quality is the bottleneck.</span></div>
+<div style="display: flex; gap: 16px; padding: 9px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #4A5676">March</span><span>Seven agents designed and built, grounded in 34 reference documents.</span></div>
+<div style="display: flex; gap: 16px; padding: 9px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #4A5676">April</span><span>Runner-up, internal ideathon. Prompts rewritten. Retrieval and tool server deployed.</span></div>
+<div style="display: flex; gap: 16px; padding: 9px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #4A5676">May</span><span>Cited by the CEO in an all-company note.</span></div>
+<div style="display: flex; gap: 16px; padding: 9px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #4A5676">June</span><span><strong style="font-weight: 600">Best in Show, company hackathon.</strong></span></div>
+<div style="display: flex; gap: 16px; padding: 9px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #4A5676">September</span><span>Corpus census. Another engineering team asks to use the search tool.</span></div>
+<div style="display: flex; gap: 16px; padding: 9px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #4A5676">October</span><span>Retrospective written and ownership handed over.</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- OPEN WORK -->
+<section id="open-work" style="background: #2B4BFF; color: #FFFFFF; padding: 88px 0">
+<div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase">Case 03 · Public and open source</p>
+<h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance; max-width: 20ch">F3, an open model of the AI race and planetary limits</h2>
+<p style="margin: 0; max-width: 64ch; font-size: 19px">World-system models and AI growth models rarely meet. F3 couples them in one set of feedback loops, in Python, under Apache 2.0. I run it with coding agents and act as editor in chief: every assumption is recorded and approved in a public decision log.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px">
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px">
+<li>Phases 0 and 1 are complete: reference models reproduced and audited before anything was changed.</li>
+<li>Audits run in public on GitHub Actions, with pinned versions.</li>
+<li>Three validation tests failed and are published as failed, with the numbers.</li>
+<li>No model results are published yet. Coupling the AI sector is next.</li>
+</ul>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<a href="https://github.com/stefbeau/F3" style="display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 56px; padding: 12px 20px; background: #FFFFFF; color: #0D1430; text-decoration: none; font-weight: 600"><span>Code, tests and decision log</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 400">github.com/stefbeau/F3</span></a>
+<a href="https://stefbeau.github.io/F3/" style="display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 56px; padding: 12px 20px; background: #FFFFFF; color: #0D1430; text-decoration: none; font-weight: 600"><span>The explorer site</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 400">stefbeau.github.io/F3</span></a>
+<a href="https://github.com/stefbeau/agentic-docs-pipeline" style="display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 56px; padding: 12px 20px; border: 1px solid #FFFFFF; color: #FFFFFF; text-decoration: none; font-weight: 600"><span>Pipeline design notes</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 400">agentic-docs-pipeline</span></a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background: #0D1430; color: #F2F4F7; padding: 88px 0 40px">
+<div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 56px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: end">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #F5B83D">About</p>
+<h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(40px, 6vw, 84px); line-height: 1; letter-spacing: -0.025em">Stéphane Beau</h2>
+<p style="margin: 0; color: #C9D1EA; max-width: 56ch">Lead technical writer with 25 years in software documentation, the last 18 at a global B2B data company. I work in English, French and Spanish, fully remote from Haux, near Bordeaux, France.</p>
+<p style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 26px; line-height: 1.25; max-width: 30ch">I am looking for work where documentation is treated as infrastructure that people and models both read.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<a href="https://www.linkedin.com/in/stefbeau" style="display: flex; align-items: center; min-height: 56px; padding: 12px 20px; background: #F5B83D; color: #0D1430; text-decoration: none; font-weight: 600">linkedin.com/in/stefbeau</a>
+<a href="https://github.com/stefbeau" style="display: flex; align-items: center; min-height: 56px; padding: 12px 20px; border: 1px solid #F2F4F7; color: #F2F4F7; text-decoration: none; font-weight: 600">github.com/stefbeau</a>
+</div>
+</div>
+<p style="margin: 0; padding-top: 24px; border-top: 1px solid #3A4672; color: #9BA8CC; font-size: 14px; max-width: 80ch">Anonymised case study. Product names, system names, identifiers and sample data have been replaced with generic ones. The architecture, the decisions and the figures are real, taken from my own tracking files and project retrospective, and are approximate where they were not re-verified.</p>
+</div>
+</section>
+
+</div>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var MONO = "font-family: 'IBM Plex Mono', ui-monospace, monospace;";
+  var SERIF = "font-family: 'Fraunces', Georgia, serif;";
+  var el = function (tag, css, text) { var e = document.createElement(tag); if (css) e.style.cssText = css; if (text != null) e.textContent = text; return e; };
+
+  var T = {
+    change: { label: "Change", forced: false, text: "Atlas Charts: the legacy CSV export retires on 15-JAN-2027.",
+      page: "KB-1042 Exporting data", near: "KB-0877 Supported file formats   semantic match 0.81",
+      del: "Choose CSV (legacy) or CSV from the Export menu.",
+      add: "Choose CSV from the Export menu. The legacy CSV option was retired on 15-JAN-2027." },
+    enhancement: { label: "Enhancement", forced: false, text: "Atlas Charts: saved views can now be shared with a team.",
+      page: "KB-0611 Saving a view", near: "KB-0614 Managing team workspaces   semantic match 0.81",
+      del: "Saved views are visible only to you.",
+      add: "Saved views are private by default. Select Share to make a view available to your team." },
+    content_area: { label: "Content-area request", forced: true, text: "Reorganise the Getting Started pages for Atlas Charts.",
+      page: "KB-0100 Getting started", near: "KB-0101 Your first chart   semantic match 0.81",
+      del: "(section order: Install, Configure, First chart)",
+      add: "(section order: First chart, Configure, Install)" },
+    direct: { label: "Direct docs request", forced: true, text: "The Export page shows an outdated screenshot.",
+      page: "KB-1042 Exporting data", near: "no search needed: the request names the page",
+      del: "[screenshot: Export menu, previous layout]",
+      add: "[screenshot placeholder: Export menu, current layout]" }
+  };
+  var AG = {
+    "00": { nm: "Orchestrator", tagText: "deterministic", det: true, what: "Looks up the route. Passes each agent only the fields it needs." },
+    "01": { nm: "Intake", tagText: "rules + LLM", det: false, what: "Validates first, scans the full comment thread, then extracts a typed change object." },
+    "02": { nm: "Impact", tagText: "retrieval", det: true, what: "Finds affected pages. Explicit references first, semantic search second, never an invented ID." },
+    "03": { nm: "Content prep", tagText: "LLM draft", det: false, what: "Drafts suggested edits as a diff, one page at a time." },
+    "04": { nm: "Notice", tagText: "LLM draft", det: false, what: "Drafts the customer notice against written style and timing rules, for the writer to review and send." },
+    "06": { nm: "Governance", tagText: "deterministic", det: true, what: "Scores readiness and writes the audit record." }
+  };
+  var s = { type: "change", docs: true, notice: true, pos: 4, gate: null, cms: 0, idx: 1, flag: 1 };
+
+  function mode() {
+    if (T[s.type].forced) return "docs_only";
+    if (s.docs && s.notice) return "both";
+    if (s.docs) return "docs_only";
+    if (s.notice) return "notice_only";
+    return "neither";
+  }
+  function plan(m) {
+    var p = ["00", "01"];
+    if (m === "both" || m === "docs_only") p.push("02", "03", "gate");
+    if (m === "both" || m === "notice_only") p.push("04");
+    p.push("06");
+    return p;
+  }
+  function output(id, m) {
+    var t = T[s.type], forced = t.forced;
+    var L = function (str, color) { return { s: str, color: color || "#0D1430" }; };
+    if (id === "00") return [L("workflow_mode = " + m), L("agents = " + plan(m).filter(function (x) { return x !== "gate" && x !== "00"; }).join(" → "))];
+    if (id === "01") return [L("type: " + s.type), L("docs_changes_noted: " + (forced ? true : s.docs)), L("notice_required: " + (forced ? false : s.notice)), L("validation: passed"), L("confidence: 0.91")];
+    if (id === "02") return [L("1. " + t.page + "   explicit reference"), L("2. " + t.near), L("all IDs validated against the index · cap 8", "#4A5676")];
+    if (id === "03") return [L("- " + t.del, "#A32A16"), L("+ " + t.add, "#0B6B49")];
+    if (id === "04") {
+      if (s.type === "change") return [L("Subject: Atlas Charts: Legacy CSV export retires 15-JAN-2027"), L("On 15-JAN-2027 the legacy CSV export option will be removed."), L("Use the CSV option in the Export menu instead."), L("status: draft for writer review, not sent", "#4A5676")];
+      return [L("Subject: Atlas Charts: Share saved views with your team"), L("You can now share a saved view with your team."), L("Open a saved view and select Share."), L("status: draft for writer review, not sent", "#4A5676")];
+    }
+    if (s.gate === "rejected") return [L("readiness: 0.40  BLOCKED", "#A32A16"), L("package returned to the writer at the gate"), L("nothing was drafted for customers")];
+    if (m === "neither") return [L("readiness: 1.00  READY", "#0B6B49"), L("no docs change, no notice: logged and closed")];
+    return [L("readiness: 0.92  READY", "#0B6B49"), L("route ok · pages validated · " + (m === "notice_only" ? "notice drafted" : "edits approved by writer")), L("audit record written")];
+  }
+  function restart(patch) { s.pos = 0; s.gate = null; for (var k in patch) s[k] = patch[k]; render(); }
+
+  function renderControls(m) {
+    var box = $("types"); box.textContent = "";
+    Object.keys(T).forEach(function (k) {
+      var on = s.type === k;
+      var b = el("button", "min-height: 44px; padding: 8px 16px; border-radius: 999px; font-size: 15px; border: 1px solid " + (on ? "#2B4BFF" : "#9BA8CC") + "; background: " + (on ? "#2B4BFF" : "#FFFFFF") + "; color: " + (on ? "#FFFFFF" : "#0D1430"), T[k].label);
+      b.type = "button"; b.setAttribute("aria-pressed", String(on));
+      b.addEventListener("click", function () { restart({ type: k }); });
+      box.appendChild(b);
+    });
+    var forced = T[s.type].forced;
+    $("scenario").textContent = "“" + T[s.type].text + "”";
+    [["t-docs", forced ? true : s.docs], ["t-notice", forced ? false : s.notice]].forEach(function (x) {
+      var b = $(x[0]);
+      b.disabled = forced; b.style.opacity = forced ? "0.5" : "1";
+      b.setAttribute("aria-pressed", String(x[1]));
+      b.firstElementChild.style.background = x[1] ? "#0D1430" : "#FFFFFF";
+    });
+    $("routeText").textContent = "type=" + s.type + (forced ? " (always docs only)" : " · docs=" + s.docs + " · notice=" + s.notice);
+    $("modeText").textContent = m;
+  }
+
+  function renderSteps(m) {
+    var p = plan(m), list = $("steps"), stopped = s.gate === "rejected";
+    list.textContent = "";
+    p.forEach(function (id, i) {
+      if (id === "gate") {
+        var waiting = i > s.pos, active = i === s.pos && s.gate === null;
+        var outer = el("div", "padding: 14px; background-color: #F5B83D; background-image: repeating-linear-gradient(135deg, transparent 0 14px, rgba(13,20,48,0.22) 14px 17px); opacity: " + (waiting ? 0.55 : 1));
+        var inner = el("div", "background: #FFF6DF; color: #0D1430; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px");
+        inner.appendChild(el("p", "margin: 0; " + MONO + " font-size: 13px; letter-spacing: 0.14em; font-weight: 500; color: #7A4300", "HOLD · WRITER APPROVAL REQUIRED"));
+        inner.appendChild(el("p", "margin: 0; " + SERIF + " font-size: 24px; font-weight: 500; line-height: 1.25",
+          waiting ? "Nothing after this point runs until a person approves the package."
+          : active ? "The package is ready. You are the writer: approve the suggested edits, or send them back."
+          : s.gate === "approved" ? "Approved by the writer. Downstream steps may run."
+          : "Rejected. The run stops here and the package goes back to the writer."));
+        if (active) {
+          var row = el("div", "display: flex; flex-wrap: wrap; gap: 10px");
+          var a = el("button", "min-height: 48px; padding: 10px 22px; border: 0; background: #0D1430; color: #FFFFFF; font-weight: 600", "Approve package");
+          var x = el("button", "min-height: 48px; padding: 10px 22px; border: 2px solid #A32A16; background: transparent; color: #A32A16; font-weight: 600", "Reject and return");
+          a.type = "button"; x.type = "button";
+          a.addEventListener("click", function () { s.gate = "approved"; s.pos = i + 1; render(); });
+          x.addEventListener("click", function () { s.gate = "rejected"; s.pos = p.length; render(); });
+          row.appendChild(a); row.appendChild(x); inner.appendChild(row);
+        }
+        outer.appendChild(inner); list.appendChild(outer); return;
+      }
+      var A = AG[id], skipped = stopped && id === "04", done = i < s.pos && !skipped, next = i === s.pos;
+      var card = el("div", "background: #FFFFFF; border: 1px " + (skipped ? "dashed" : "solid") + " #D5DBE8; padding: 16px 20px; display: flex; flex-direction: column; gap: 6px; opacity: " + (skipped ? 0.6 : 1));
+      var top = el("div", "display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center");
+      top.appendChild(el("span", SERIF + " font-size: 26px; font-weight: 600; line-height: 1; color: " + (done ? "#0D1430" : next ? "#2B4BFF" : "#7C88A8"), id));
+      top.appendChild(el("strong", "font-size: 18px; font-weight: 600", A.nm));
+      var tc = A.det ? "#0B6B49" : "#2B4BFF";
+      top.appendChild(el("span", MONO + " font-size: 12px; padding: 2px 8px; border: 1px solid " + tc + "; color: " + tc, A.tagText));
+      top.appendChild(el("span", "margin-left: auto; " + MONO + " font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: " + (skipped ? "#A32A16" : done ? "#0B6B49" : next ? "#2B4BFF" : "#5B6788"), skipped ? "not run" : done ? "done" : next ? "next" : "queued"));
+      card.appendChild(top);
+      card.appendChild(el("p", "margin: 0; color: #4A5676; font-size: 15px", A.what));
+      if (done) {
+        var out = el("div", "margin-top: 6px; background: #F2F4F7; border: 1px solid #D5DBE8; padding: 12px 14px; " + MONO + " font-size: 13px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere");
+        output(id, m).forEach(function (ln) { out.appendChild(el("div", "color: " + ln.color, ln.s)); });
+        card.appendChild(out);
+      }
+      list.appendChild(card);
+    });
+    var atGate = p[s.pos] === "gate" && s.gate === null, finished = s.pos >= p.length;
+    var run = $("run");
+    run.disabled = atGate || finished; run.style.opacity = (atGate || finished) ? "0.5" : "1";
+    run.textContent = finished ? "Run complete" : atGate ? "Waiting for the writer" : "Run next step";
+  }
+
+  function verdict() {
+    if (s.cms && s.idx && s.flag) return { v: "Healthy", d: "The page exists, is indexed, and is visible to the right audience. The assistant can cite it.", n: "More than 98% of public pages", bg: "#0B6B49", fg: "#FFFFFF" };
+    if (s.cms && s.idx && !s.flag) return { v: "Wrongly suppressed", d: "The page is indexed but marked internal, so it is never surfaced. All of these had been edited within the last year.", n: "12 pages", bg: "#F5B83D", fg: "#0D1430" };
+    if (s.cms && !s.idx) return { v: "Blind spot", d: "A public page that never reached the index. The assistant returns nothing for it, and the writing effort is invisible.", n: "58 pages, two published the week before", bg: "#A32A16", fg: "#FFFFFF" };
+    if (!s.cms && s.idx) return { v: "Ghost page", d: "Deleted from the content system but still in the index. The assistant can cite it, and the link returns Page Not Found.", n: "123 pages", bg: "#A32A16", fg: "#FFFFFF" };
+    return { v: "Gone, as intended", d: "Deleted from the content system and absent from the index. Nothing to do.", n: "No finding", bg: "#0D1430", fg: "#F2F4F7" };
+  }
+  function renderCensus() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-seg]"), function (b) {
+      var on = !!s[b.getAttribute("data-seg")], isYes = b.getAttribute("data-v") === "y", sel = on === isYes;
+      b.setAttribute("aria-pressed", String(sel));
+      b.style.background = sel ? "#0D1430" : "#FFFFFF"; b.style.color = sel ? "#FFFFFF" : "#0D1430";
+    });
+    var v = verdict(), box = $("verdict");
+    box.style.background = v.bg; box.style.color = v.fg;
+    $("v-v").textContent = v.v; $("v-d").textContent = v.d; $("v-n").textContent = v.n;
+  }
+  function render() { var m = mode(); renderControls(m); renderSteps(m); renderCensus(); }
+
+  $("run").addEventListener("click", function () { var p = plan(mode()); if (s.pos < p.length && p[s.pos] !== "gate") { s.pos += 1; render(); } });
+  $("reset").addEventListener("click", function () { restart({}); });
+  $("t-docs").addEventListener("click", function () { restart({ docs: !s.docs }); });
+  $("t-notice").addEventListener("click", function () { restart({ notice: !s.notice }); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-seg]"), function (b) {
+    b.addEventListener("click", function () { s[b.getAttribute("data-seg")] = b.getAttribute("data-v") === "y" ? 1 : 0; renderCensus(); });
+  });
+  render();
+})();
+
+</script>
+</body>
+</html>
