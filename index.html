@@ -30,6 +30,7 @@ section,header{scroll-margin-top:12px}
 <span style="font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-weight: 600; margin-right: auto">Stéphane Beau</span>
 <a href="#pipeline" style="color: #C9D1EA; text-decoration: none">Pipeline</a>
 <a href="#decisions" style="color: #C9D1EA; text-decoration: none">Decisions</a>
+<a href="#docloop" style="color: #C9D1EA; text-decoration: none">Version 2</a>
 <a href="#census" style="color: #C9D1EA; text-decoration: none">Census</a>
 <a href="#metrics" style="color: #C9D1EA; text-decoration: none">Metrics</a>
 <a href="#open-work" style="color: #C9D1EA; text-decoration: none">Open work</a>
@@ -38,7 +39,7 @@ section,header{scroll-margin-top:12px}
 <div style="display: flex; flex-direction: column; gap: 32px; padding: 72px 0 64px">
 <p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #F5B83D">Technical writer turned documentation systems builder</p>
 <h1 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(44px, 7.4vw, 108px); line-height: 0.98; letter-spacing: -0.03em; text-wrap: balance; max-width: 13ch">When AI answers from your docs, a stale page is <span style="color: #F5B83D; font-style: italic">bad data.</span></h1>
-<p style="margin: 0; font-size: 21px; line-height: 1.5; color: #C9D1EA; max-width: 58ch">I spent 25 years writing technical documentation. In 2026 I built the system that keeps a large knowledge base in step with the product it describes: seven agents, one mandatory human approval, and a census that audits what the AI can really retrieve.</p>
+<p style="margin: 0; font-size: 21px; line-height: 1.5; color: #C9D1EA; max-width: 58ch">I spent 25 years writing technical documentation. In 2026 I built the system that keeps a large knowledge base in step with the product it describes: seven agents and one mandatory human approval. Then I rebuilt it in the open as a single lead agent and measured it against real edit history.</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 10px; margin-top: 12px">
 <div style="border: 1px solid #3A4672; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #9BA8CC">01</span><strong style="font-weight: 600">Product changes</strong><span style="font-size: 14px; color: #C9D1EA">A change request is filed.</span></div>
 <div style="border: 1px solid #FF8A73; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #FF8A73">02</span><strong style="font-weight: 600">Docs lag behind</strong><span style="font-size: 14px; color: #C9D1EA">Nobody measures the gap.</span></div>
@@ -193,11 +194,60 @@ section,header{scroll-margin-top:12px}
 </div>
 </section>
 
+<!-- DOCLOOP -->
+<section id="docloop" style="background: #FFFFFF; padding: 88px 0">
+<div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #2B4BFF">Case 02 · Rebuilt in the open</p>
+<h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance">Version 2: one lead agent, measured on real edit history</h2>
+<p style="margin: 0; color: #4A5676; max-width: 64ch">By the end of the year the seven agents had become thin wrappers around tools. In November 2026 I rebuilt the idea as DocLoop, an open-source project. One lead agent follows written skills, calls deterministic tools, and hands single pages to subagents. Nothing writes to the docs except a named person's approval.</p>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; padding-bottom: 10px; border-bottom: 2px solid #0D1430; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5676"><span style="flex: 1 1 220px">Version 1</span><span style="flex: 1 1 240px">Version 2</span><span style="flex: 2 1 320px">Why</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 1 1 220px; color: #4A5676">Seven standing agents</span><strong style="flex: 1 1 240px; font-weight: 600">One lead agent; subagents created per task</strong><span style="flex: 2 1 320px; font-size: 15px; color: #4A5676">The subtasks depend on the change, so a fixed roster either over-serves or under-serves it.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 1 1 220px; color: #4A5676">Knowledge in seven prompts</span><strong style="flex: 1 1 240px; font-weight: 600">Six written skills, loaded on demand</strong><span style="flex: 2 1 320px; font-size: 15px; color: #4A5676">A skill is a document: reviewable, versioned, portable across runtimes.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 1 1 220px; color: #4A5676">Routing by a model</span><strong style="flex: 1 1 240px; font-weight: 600">A lookup table in a tool</strong><span style="flex: 2 1 320px; font-size: 15px; color: #4A5676">A decision with five outcomes does not need judgement.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 1 1 220px; color: #4A5676">Never invent a page ID, as a prompt rule</span><strong style="flex: 1 1 240px; font-weight: 600">The tool rejects any ID the docs do not hold</strong><span style="flex: 2 1 320px; font-size: 15px; color: #4A5676">A rule in a prompt can be ignored. A rule in a tool cannot.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 1 1 220px; color: #4A5676">An approval step between two agents</span><strong style="flex: 1 1 240px; font-weight: 600">No write tool exists; approve and apply are human commands</strong><span style="flex: 2 1 320px; font-size: 15px; color: #4A5676">The gate stops depending on the agents behaving.</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #D5DBE8"><span style="flex: 1 1 220px; color: #4A5676">Built for one platform and one content system</span><strong style="flex: 1 1 240px; font-weight: 600">One core, three runtimes, two page stores</strong><span style="flex: 2 1 320px; font-size: 15px; color: #4A5676">The platform is the part most likely to change.</span></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 18px">
+<h3 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600">Does it find the right pages?</h3>
+<p style="margin: 0; color: #4A5676; max-width: 64ch">Version 1 could say a run finished. It could not say the pages it picked were right. DocLoop replays the real history of a docs repository: for each past change it rebuilds the docs as they were, asks which pages the change affects, and compares with the pages a person really edited.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 0 32px; border-top: 2px solid #0D1430">
+<div style="padding: 18px 0; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 56px; font-weight: 600; line-height: 1; color: #2B4BFF">75%</span><strong style="font-weight: 600">Right page found by plain search</strong><span style="font-size: 15px; color: #4A5676">186 human-written changes in the Hugging Face Hub docs history. Recall 65%.</span></div>
+<div style="padding: 18px 0; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 56px; font-weight: 600; line-height: 1; color: #0D1430">51 → 69%</span><strong style="font-weight: 600">Word search, then hybrid search</strong><span style="font-size: 15px; color: #4A5676">80 changes in the OpenBB docs history, where commit messages are terse.</span></div>
+<div style="padding: 18px 0; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Fraunces', Georgia, serif; font-size: 56px; font-weight: 600; line-height: 1; color: #0D1430">72 to 80%</span><strong style="font-weight: 600">Right pages an AI reader keeps</strong><span style="font-size: 15px; color: #4A5676">It also drops 69 to 77% of wrong ones. Used to sort candidates, never to delete them.</span></div>
+</div>
+<p style="margin: 0; font-size: 15px; color: #4A5676; max-width: 80ch">These figures score the search DocLoop starts from, before a person reviews anything. They are not an assessment of either project's documentation.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<h3 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600">What measuring changed</h3>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px">
+<li>A third of one test corpus was bot commits whose title names nothing. Scored with them, search looked like 49%. Without them, 75%.</li>
+<li>A rule kept from version 1, stop at the pages a change names, was costing recall. Named pages now come first and search fills in after them: recall on those changes went from 52% to 68%.</li>
+<li>An AI reader used as a filter was no better than cutting the list to the same length. It now sorts candidates into likely and also check, and deletes nothing.</li>
+</ul>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<a href="https://github.com/stefbeau/DocLoop" style="display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 56px; padding: 12px 20px; background: #0D1430; color: #FFFFFF; text-decoration: none; font-weight: 600"><span>Code, skills and tests</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 400">github.com/stefbeau/DocLoop</span></a>
+<a href="https://github.com/stefbeau/DocLoop/blob/main/docs/evaluation.md" style="display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 56px; padding: 12px 20px; border: 1px solid #0D1430; color: #0D1430; text-decoration: none; font-weight: 600"><span>Method, results and caveats</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 400">docs/evaluation.md</span></a>
+<a href="https://github.com/stefbeau/DocLoop/blob/main/docs/evolution.md" style="display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 56px; padding: 12px 20px; border: 1px solid #0D1430; color: #0D1430; text-decoration: none; font-weight: 600"><span>From seven agents to one</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 400">docs/evolution.md</span></a>
+<p style="margin: 0; font-size: 15px; color: #4A5676">Runs three ways over the same core: as skills in a coding agent, as a standalone Python agent, and on Hugging Face smolagents.</p>
+</div>
+</div>
+</div>
+</section>
+
 <!-- CENSUS -->
 <section id="census" style="padding: 88px 0">
 <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 40px">
 <div style="display: flex; flex-direction: column; gap: 14px">
-<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #2B4BFF">Case 02 · Corpus census</p>
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #2B4BFF">Case 03 · Corpus census</p>
 <h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance">Auditing what the AI can retrieve</h2>
 <p style="margin: 0; color: #4A5676; max-width: 64ch">The content system knows which pages exist. The search index knows which pages the assistant can serve. Nobody had compared the two. I reconciled them page by page across roughly 6,600 canonical pages. More than 98% of public pages were retrievable, and the exceptions were invisible from every existing dashboard.</p>
 </div>
@@ -246,7 +296,7 @@ section,header{scroll-margin-top:12px}
 <section id="metrics" style="background: #FFFFFF; padding: 88px 0">
 <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 40px">
 <div style="display: flex; flex-direction: column; gap: 14px">
-<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #2B4BFF">Both cases · Evidence</p>
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #2B4BFF">Version 1 · Evidence</p>
 <h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance">What the numbers measure, and what they don't</h2>
 <p style="margin: 0; color: #4A5676; max-width: 64ch">The headline figures are real, but they measure different things and get merged when retold. This is the table I handed to the next owner.</p>
 </div>
@@ -305,7 +355,7 @@ section,header{scroll-margin-top:12px}
 <section id="open-work" style="background: #2B4BFF; color: #FFFFFF; padding: 88px 0">
 <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 36px">
 <div style="display: flex; flex-direction: column; gap: 14px">
-<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase">Case 03 · Public and open source</p>
+<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase">Case 04 · Public and open source</p>
 <h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance; max-width: 20ch">F3, an open model of the AI race and planetary limits</h2>
 <p style="margin: 0; max-width: 64ch; font-size: 19px">World-system models and AI growth models rarely meet. F3 couples them in one set of feedback loops, in Python, under Apache 2.0. I run it with coding agents and act as editor in chief: every assumption is recorded and approved in a public decision log.</p>
 </div>
